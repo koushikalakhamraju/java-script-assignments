@@ -2,7 +2,7 @@
 
 var input_data= document.querySelector("input");
 var addbtn=document.querySelector(".todoslist");
-var tododata=document.querySelector(".todospending");
+var tododata=document.querySelector(".todopending");
 var tododatacompleted=document.querySelector(".todoscompleted");
 
 addbtn.addEventListener('click',fetchapi())
@@ -20,7 +20,7 @@ function fetchdata(data){
         if (each.completed===true){
             let para=document.createElement('p');
             para.innerHTML=each.title;
-            para.style.color='red';
+            para.style.color='orange';
             tododatacompleted.appendChild(para);
         }
         else if(each.completed===false){
