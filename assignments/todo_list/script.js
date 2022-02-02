@@ -1,27 +1,33 @@
-var inputtext = document.querySelector("input");
-var addbutton = document.querySelector("button");
-var tododata = document.querySelector('.todos');
-var count=0;
-
-addbutton.addEventListener('click',function() {
-    var data=inputtext.value;
-    var para = document.createElement("p");
-    para.setAttribute("key",count);
-    para.append(data);
-    tododata.append(para);
-    inputtext.value="";
-    count=count+1
-
-    para.addEventListener('click',function(){
-        para.remove()
-    })
-        
-})
 
 
-    
+var input_data= document.querySelector("input");
+var addbtn=document.querySelector(".todoslist");
+var tododata=document.querySelector(".todospending");
+var tododatacompleted=document.querySelector(".todoscompleted");
+
+addbtn.addEventListener('click',fetchapi())
 
 
+function fetchapi(){
 
-
-
+    fetch("https://jsonplaceholder.typicode.com/todos")
+    .then(res=>res.json())
+    .then(data=>fetchdata(data))   
+}
+function fetchdata(data){
+    for (i=0;i<data.length;i++){
+        each=data[i]
+        if (each.completed===true){
+            let para=document.createElement('p');
+            para.innerHTML=each.title;
+            para.style.color='red';
+            tododatacompleted.appendChild(para);
+        }
+        else if(each.completed===false){
+            let para=document.createElement('p');
+            para.innerHTML=each.title;
+            para.style.color='green';
+            tododata.appendChild(para);
+        }
+    }
+}
